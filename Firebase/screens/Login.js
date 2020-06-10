@@ -5,6 +5,7 @@ import {
   FlatList,
   StyleSheet,
   Text,
+  View,
 } from "react-native";
 import Constants from "expo-constants";
 
@@ -52,19 +53,32 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
-        data={DATA}
-        renderItem={({ item }) => (
-          <Item
-            id={item.id}
-            title={item.title}
-            selected={!!selected.get(item.id)}
-            onSelect={onSelect}
-          />
-        )}
-        keyExtractor={(item) => item.id}
-        extraData={selected}
-      />
+      <View style={{ flex: 1, borderWidth: 1, borderColor: "black" }}>
+        <View
+          style={{
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Text style={{ fontSize: 30 }}>
+            Please click on a category to upload files
+          </Text>
+        </View>
+        <FlatList
+          data={DATA}
+          renderItem={({ item }) => (
+            <Item
+              id={item.id}
+              title={item.title}
+              selected={!!selected.get(item.id)}
+              onSelect={onSelect}
+            />
+          )}
+          keyExtractor={(item) => item.id}
+          extraData={selected}
+        />
+      </View>
     </SafeAreaView>
   );
 }

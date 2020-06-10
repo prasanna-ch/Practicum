@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\DELL\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add react-navigation-stack --save
+  C:\Program Files\nodejs\node.exe C:\Users\DELL\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add react-native-hide-show-password-input
 
 PATH: 
   C:\Users\DELL\AppData\Local\Programs\Python\Python38-32;C:\Users\DELL\AppData\Local\Programs\Python\Python38-32\Scripts;C:\WINDOWS\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps;"C:\Program Files (x86)\PostgreSQL\10;";"C:\Program Files (x86)\PostgreSQL\10\lib;";C:\Program Files\nodejs\;C:\Users\DELL\AppData\Roaming\npm;C:\Windows\System32\;C:\Users\DELL\AppData\Local\Microsoft\WindowsApps;C:\Users\DELL\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files (x86)\Nmap;C:\Users\DELL\AppData\Roaming\npm
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'C:\Users\DELL\Desktop\WebDevelopement\Project\Firebase\node_modules\@react-navigation\stack\node_modules\.bin'
+  Error: EPERM: operation not permitted, unlink 'C:\Users\DELL\Desktop\ReactNative_Mobile_Practicum\Firebase\node_modules\@babel\compat-data\node_modules\.bin'
 
 npm manifest: 
   {
@@ -46,7 +46,9 @@ npm manifest:
       "react-native-safe-area-context": "0.7.3",
       "react-native-screens": "~2.2.0",
       "react-native-web": "~0.11.7",
-      "react-navigation": "^4.3.9"
+      "react-navigation": "^4.3.9",
+      "react-navigation-drawer": "^2.4.13",
+      "react-navigation-stack": "^2.5.1"
     },
     "devDependencies": {
       "@babel/core": "^7.8.6",
@@ -5158,6 +5160,19 @@ Lockfile:
       scheduler "0.15.0"
       stacktrace-parser "^0.1.3"
       whatwg-fetch "^3.0.0"
+  
+  react-navigation-drawer@^2.4.13:
+    version "2.4.13"
+    resolved "https://registry.yarnpkg.com/react-navigation-drawer/-/react-navigation-drawer-2.4.13.tgz#9a5240664c1022a58a598fb326124185a6f8f0f0"
+    integrity sha512-C9YI8iks0EoTpfDtE7Ys/QJy42jFfTJZqHNULzIu9doqbc5z6cc4Uutz9nUvAae3hJguUrv61FssC+caR6XuFg==
+  
+  react-navigation-stack@^2.5.1:
+    version "2.5.1"
+    resolved "https://registry.yarnpkg.com/react-navigation-stack/-/react-navigation-stack-2.5.1.tgz#4ae3511654fb7f5c1e28305366aa8d3d973dec9e"
+    integrity sha512-LNMIIt1B22IohL7Nbyk7Jk4y8lSvFrA6nna1pqx8wwEDlylT9U1NZ719HZibegr3CPJBZKjqpdGCGUd8sE6b8A==
+    dependencies:
+      color "^3.1.2"
+      react-native-iphone-x-helper "^1.2.1"
   
   react-navigation@^4.3.9:
     version "4.3.9"
