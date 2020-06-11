@@ -11,6 +11,7 @@ import {
 import HomeScreen from "./screens/HomeScreen";
 import Login from "./screens/Login";
 import SetPassword from "./screens/SetPassword";
+import confirmPassword from "./screens/confirmPassword";
 import { Ionicons } from "@expo/vector-icons";
 import LogoutScreen from "./screens/LogoutScreen";
 import CustomDrawerComponent from "./screens/DrawerNavigator/CustomDrawerComponent";
@@ -19,6 +20,7 @@ import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
 
 import { createStackNavigator } from "react-navigation-stack";
+import LoginAuthentication from "./screens/LoginAuthentication";
 
 const App = () => <AppContainer />;
 
@@ -31,6 +33,14 @@ const LoginStackNavigator = createStackNavigator({
   },
   SetPassword: {
     screen: SetPassword,
+    navigationOptions: {},
+  },
+  confirmPassword: {
+    screen: confirmPassword,
+    navigationOptions: {},
+  },
+  LoginAuthentication: {
+    screen: LoginAuthentication,
     navigationOptions: {},
   },
 });
