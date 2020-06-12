@@ -17,8 +17,10 @@ import { firebaseConfig } from "../config/config";
 import "firebase/storage";
 import "firebase/database";
 import "firebase/auth";
+import confirmPassword from "./confirmPassword";
 
 import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
+
 function PhnAuth() {
   const recaptchaVerifier = React.useRef(null);
   // const [phoneNumber, setPhoneNumber] = React.useState();
@@ -35,7 +37,7 @@ function PhnAuth() {
       />
       <Text style={{ marginTop: 10 }}>Login ID</Text>
       <TextInput
-        style={{ marginVertical: 10, fontSize: 17 }}
+        style={styles.input}
         autoFocus
         placeholder="Enter the login ID"
         onChangeText={(loginID) => setLoginID(loginID)}
@@ -48,8 +50,12 @@ function PhnAuth() {
           try {
             const ref = firebase.database().ref("Users/" + loginID);
             ref.on("value", (snapshot) => {
-              phn = snapshot.val().Mobile;
-              // console.log(phn);
+              if (snapshot.exists()) {
+                phn = snapshot.val().Mobile;
+              } else {
+                alert("Invalid login ID");
+                window.set.setStates("reload");
+              }
             });
             const phoneProvider = new firebase.auth.PhoneAuthProvider();
             const verificationId = await phoneProvider.verifyPhoneNumber(
@@ -61,15 +67,17 @@ function PhnAuth() {
               text: "Verification code has been sent to your phone.",
             });
           } catch (err) {
-            showMessage({ text: `Error: ${err.message}`, color: "red" });
+            // showMessage({ text: `Error: ${err.message}`, color: "pink" });
+            alert("Please try again");
           }
         }}
       />
       <Text style={{ marginTop: 20 }}>Enter Verification code</Text>
       <TextInput
-        style={{ marginVertical: 10, fontSize: 17 }}
+        style={styles.input}
         editable={!!verificationId}
         placeholder="123456"
+        keyboardType="number-pad"
         onChangeText={setVerificationCode}
       />
       <Button
@@ -83,20 +91,17 @@ function PhnAuth() {
             );
             await firebase.auth().signInWithCredential(credential);
             showMessage({ text: "Phone authentication successful 👍" });
+            window.set.setStates(loginID);
           } catch (err) {
-            showMessage({ text: `Error: ${err.message}`, color: "red" });
+            // showMessage({ text: `Error: ${err.message}`, color: "red" });
+            alert("Invalid OTP");
           }
         }}
-      />
-      <Button
-        style={{ marginTop: 100 }}
-        title="Click to continue"
-        onPress={() => this.props.navigation.navigate("confirmPassword")}
       />
       {message ? (
         <TouchableOpacity
           style={[
-            StyleSheet.absoluteFill,
+            // StyleSheet.absoluteFill,
             { backgroundColor: 0xffffffee, justifyContent: "center" },
           ]}
           onPress={() => showMessage(undefined)}
@@ -105,7 +110,6 @@ function PhnAuth() {
             style={{
               color: message.color || "blue",
               fontSize: 17,
-              textAlign: "center",
               marginTop: 60,
             }}
           >
@@ -121,19 +125,31 @@ export default class SetPassword extends React.Component {
   constructor() {
     super();
     this.initialiszeFirebase();
-    state: {
-      recaptchaVerifier: null;
-      loginID: null;
-    }
-
-    // const [loginID, setLoginID] = React.useState();
+    this.state = {
+      status: "fail",
+      loginID: "",
+    };
+    window.set = this;
+    this.getValue = this.getValue.bind(this);
   }
   initialiszeFirebase() {
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
   }
+  getValue() {
+    return this.state.loginID;
+  }
 
+  setStates(ID) {
+    if (ID === "reload") {
+      this.props.navigation.navigate("SetPassword");
+    } else {
+      this.setState({ status: "pass", loginID: ID });
+      const { navigate } = this.props.navigation;
+      navigate("confirmPassword", { currentUserId: this.state.loginID });
+    }
+  }
   render() {
     return (
       <SafeAreaView style={GloStyles.droidSafeArea}>
@@ -149,5 +165,12 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: "center",
     justifyContent: "center",
+  },
+  input: {
+    height: 40,
+    borderColor: "#2E424D",
+    borderWidth: 1,
+    marginVertical: 10,
+    fontSize: 17,
   },
 });
