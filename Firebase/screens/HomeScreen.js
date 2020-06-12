@@ -57,9 +57,7 @@ export default class HomeScreen extends React.Component {
                 marginBottom: 10,
               }}
               title="Login"
-              onPress={() =>
-                this.props.navigation.navigate("LoginAuthentication")
-              }
+              onPress={() => this.props.navigation.navigate("Login")}
             >
               <Text style={{ fontWeight: "100" }}>Login</Text>
             </CustomActionButton>

@@ -17,10 +17,8 @@ import { firebaseConfig } from "../config/config";
 import "firebase/storage";
 import "firebase/database";
 import "firebase/auth";
-import confirmPassword from "./confirmPassword";
 
 import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
-
 function PhnAuth() {
   const recaptchaVerifier = React.useRef(null);
   // const [phoneNumber, setPhoneNumber] = React.useState();
@@ -63,7 +61,7 @@ function PhnAuth() {
               text: "Verification code has been sent to your phone.",
             });
           } catch (err) {
-            showMessage({ text: `Error: ${err.message}`, color: "pink" });
+            showMessage({ text: `Error: ${err.message}`, color: "red" });
           }
         }}
       />
@@ -72,7 +70,6 @@ function PhnAuth() {
         style={{ marginVertical: 10, fontSize: 17 }}
         editable={!!verificationId}
         placeholder="123456"
-        keyboardType="number-pad"
         onChangeText={setVerificationCode}
       />
       <Button
@@ -86,11 +83,15 @@ function PhnAuth() {
             );
             await firebase.auth().signInWithCredential(credential);
             showMessage({ text: "Phone authentication successful 👍" });
-            window.set.setStates(loginID);
           } catch (err) {
             showMessage({ text: `Error: ${err.message}`, color: "red" });
           }
         }}
+      />
+      <Button
+        style={{ marginTop: 100 }}
+        title="Click to continue"
+        onPress={() => this.props.navigation.navigate("confirmPassword")}
       />
       {message ? (
         <TouchableOpacity
@@ -104,6 +105,7 @@ function PhnAuth() {
             style={{
               color: message.color || "blue",
               fontSize: 17,
+              textAlign: "center",
               marginTop: 60,
             }}
           >
@@ -119,27 +121,19 @@ export default class SetPassword extends React.Component {
   constructor() {
     super();
     this.initialiszeFirebase();
-    this.state = {
-      status: "fail",
-      loginID: "",
-    };
-    window.set = this;
-    this.getValue = this.getValue.bind(this);
+    state: {
+      recaptchaVerifier: null;
+      loginID: null;
+    }
+
+    // const [loginID, setLoginID] = React.useState();
   }
   initialiszeFirebase() {
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
   }
-  getValue() {
-    return this.state.loginID;
-  }
 
-  setStates(ID) {
-    this.setState({ status: "pass", loginID: ID });
-    const { navigate } = this.props.navigation;
-    navigate("confirmPassword", { currentUserId: this.state.loginID });
-  }
   render() {
     return (
       <SafeAreaView style={GloStyles.droidSafeArea}>
