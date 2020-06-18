@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Firebase",
-    "slug": "Firebase",
+    "name": "prjct",
+    "slug": "prjct",
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -17,6 +17,9 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "googleServicesFile": "./google-services.json"
     }
   }
 }

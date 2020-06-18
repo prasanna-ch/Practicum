@@ -1,27 +1,10 @@
 import React from "react";
-import {
-  Text,
-  View,
-  Button,
-  StyleSheet,
-  TouchableOpacity,
-  SafeAreaView,
-} from "react-native";
+import { Text, View, Button, SafeAreaView } from "react-native";
 import firebase from "firebase";
 import { firebaseConfig } from "../config/config";
 import GloStyles from "../GloStyles";
 import PasswordInputText from "react-native-hide-show-password-input";
 import md5 from "md5";
-import colors from "../assets/Colors";
-import SetPassword from "./SetPassword";
-
-function Confirm({ Id }) {
-  alert({ Id });
-  console.log("hi");
-  const [password, setPassword] = React.useState();
-  const [confirmPassword, setConfirmPassword] = React.useState();
-  const [message, showMessage] = React.useState();
-}
 
 export default class confirmPassword extends React.Component {
   constructor() {
@@ -86,8 +69,6 @@ export default class confirmPassword extends React.Component {
                   alert("Password field could not be empty");
                   return;
                 }
-                // console.log("reached here");
-                // console.log(md5(password));
                 const ref = firebase
                   .database()
                   .ref(
@@ -109,19 +90,3 @@ export default class confirmPassword extends React.Component {
     );
   }
 }
-const styles = StyleSheet.create({
-  button: {
-    width: 50,
-    backgroundColor: colors.bgError,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  input: {
-    height: 40,
-    borderColor: "#2E424D",
-    borderWidth: 1,
-    marginVertical: 10,
-    fontSize: 17,
-  },
-});

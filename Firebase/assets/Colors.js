@@ -14,6 +14,7 @@ const colors = {
   logoColor: "#bada55",
   txtWhite: "white",
   listItemBg: "#354D58DA",
+  bgHome: "white",
 };
 
 export default colors;

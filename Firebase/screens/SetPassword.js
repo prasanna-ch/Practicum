@@ -8,22 +8,19 @@ import {
   SafeAreaView,
   TextInput,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+
 import GloStyles from "../GloStyles";
 import colors from "../assets/Colors";
-import CustomActionButton from "../components/CustomActionButton";
 import firebase from "firebase";
 import { firebaseConfig } from "../config/config";
 import "firebase/storage";
 import "firebase/database";
 import "firebase/auth";
-import confirmPassword from "./confirmPassword";
 
 import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
 
 function PhnAuth() {
   const recaptchaVerifier = React.useRef(null);
-  // const [phoneNumber, setPhoneNumber] = React.useState();
   const [loginID, setLoginID] = React.useState();
   const [verificationId, setVerificationId] = React.useState();
   const [verificationCode, setVerificationCode] = React.useState();
@@ -44,7 +41,6 @@ function PhnAuth() {
       />
       <Button
         title="Send Verification Code"
-        // disabled={!phoneNumber}
         onPress={async () => {
           var phn = "";
           try {
@@ -54,7 +50,6 @@ function PhnAuth() {
                 phn = snapshot.val().Mobile;
               } else {
                 alert("Invalid login ID");
-                window.set.setStates("reload");
               }
             });
             const phoneProvider = new firebase.auth.PhoneAuthProvider();
@@ -63,11 +58,11 @@ function PhnAuth() {
               recaptchaVerifier.current
             );
             setVerificationId(verificationId);
-            showMessage({
-              text: "Verification code has been sent to your phone.",
-            });
+            // showMessage({
+            //   text: "Verification code has been sent to your phone.",
+            // });
+            alert("Verification code has been sent to your phone.");
           } catch (err) {
-            // showMessage({ text: `Error: ${err.message}`, color: "pink" });
             alert("Please try again");
           }
         }}
@@ -93,17 +88,13 @@ function PhnAuth() {
             showMessage({ text: "Phone authentication successful 👍" });
             window.set.setStates(loginID);
           } catch (err) {
-            // showMessage({ text: `Error: ${err.message}`, color: "red" });
             alert("Invalid OTP");
           }
         }}
       />
       {message ? (
         <TouchableOpacity
-          style={[
-            // StyleSheet.absoluteFill,
-            { backgroundColor: 0xffffffee, justifyContent: "center" },
-          ]}
+          style={[{ backgroundColor: 0xffffffee, justifyContent: "center" }]}
           onPress={() => showMessage(undefined)}
         >
           <Text
@@ -142,13 +133,9 @@ export default class SetPassword extends React.Component {
   }
 
   setStates(ID) {
-    if (ID === "reload") {
-      this.props.navigation.navigate("SetPassword");
-    } else {
-      this.setState({ status: "pass", loginID: ID });
-      const { navigate } = this.props.navigation;
-      navigate("confirmPassword", { currentUserId: this.state.loginID });
-    }
+    this.setState({ status: "pass", loginID: ID });
+    const { navigate } = this.props.navigation;
+    navigate("confirmPassword", { currentUserId: this.state.loginID });
   }
   render() {
     return (

@@ -1,11 +1,8 @@
 import React from "react";
 import {
   SafeAreaView,
-  TouchableOpacity,
-  FlatList,
   StyleSheet,
   Text,
-  View,
   TextInput,
   Button,
 } from "react-native";
@@ -46,7 +43,7 @@ export default class LoginAuthentication extends React.Component {
         alert("Wrong credentials, Please check and try again");
       }
     } catch (err) {
-      alert("Wrong credentials, Please check and try again");
+      alert("Error");
     }
   }
   render() {
