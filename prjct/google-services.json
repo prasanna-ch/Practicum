@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1095007503412",
+    "firebase_url": "https://setpasswordandlogin.firebaseio.com",
+    "project_id": "setpasswordandlogin",
+    "storage_bucket": "setpasswordandlogin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095007503412:android:243027fbd25aecb1773661",
+        "android_client_info": {
+          "package_name": "com.practicum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1095007503412-mcjta3vm99p3euq4urjk3109mgo84cpc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzx11T_tEgssjllIDF4OX81hIMrziw_Es"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1095007503412-mcjta3vm99p3euq4urjk3109mgo84cpc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
